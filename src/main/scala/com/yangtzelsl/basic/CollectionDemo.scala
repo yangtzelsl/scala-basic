@@ -1,5 +1,7 @@
 package com.yangtzelsl.basic
 
+import scala.collection.mutable
+
 /**
  *
  * @Description: CollectionDemo
@@ -25,5 +27,32 @@ object CollectionDemo {
     val option: Option[Int] = Some(5)
 
     println(list)
+
+    mapIterator()
+  }
+
+  def mapIterator(): Unit = {
+    // the result type of an implicit conversion must be more specific than Object
+    val map = new mutable.HashMap[String, Any]()
+
+    map.put("aab", 18)
+    map.put("AAi", "hello")
+    map.put("asK", true)
+    map.put("yTn", 23.56)
+
+    // 方式1：每次遍历先获取key
+    for (key <- map.keys) {
+      println(key.toLowerCase + "-->" + map(key))
+    }
+
+    // 方式2：每次获取其中一个元祖
+    for (kv <- map) {
+      println(kv._1.toLowerCase + "-->" + kv._2)
+    }
+
+    // 方式3：每次循环直接解析元祖（析构）
+    for ((k, v) <- map) {
+      println(k.toLowerCase + "-->" + v)
+    }
   }
 }
